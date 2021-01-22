@@ -1,8 +1,5 @@
 package com.niuke.jz39;
 
-import java.util.LinkedList;
-import java.util.Queue;
-
 /**
  *
  * 题目描述
@@ -22,27 +19,43 @@ public class Main {
     public static void main(String[] args) {
         TreeNode root = new TreeNode(1);
         root.left = new TreeNode(2);
-        root.left.right = new TreeNode(2);
-        root.left.left = new TreeNode(2);
-        root.right = new TreeNode(2);
+        root.left.left = new TreeNode(3);
+        root.left.left.left = new TreeNode(4);
+        root.left.left.left.left = new TreeNode(5);
         System.out.println(new Main().IsBalanced_Solution(root));
     }
 
+    /**
+     * 思路：
+     * 1. 到达每个节点时，先判断此节点是否为null，如果是，则返回0
+     * 2. 节点不为null，则分别遍历节点的左右子节点，函数  left = dfs(root.left) + 1;右节点同理
+     * 3. 递归完成后，返回左右节点的最大层数
+     * @param root
+     * @return
+     */
     public boolean IsBalanced_Solution(TreeNode root) {
         if (root == null){
             return true;
         }
-        return dfs(root.left)==dfs(root.right);
+        dfs(root);
+        return flag;
     }
 
-    public int dfs(TreeNode root){
-        int layer = 0;
-        if (root == null){
-            return layer;
-        }
-        Queue<TreeNode> queue = new LinkedList<>();
+    private boolean flag = true;
 
-        return dfs(root.left)+1;
+    
+    public int dfs(TreeNode root){
+        if (!flag||root == null){
+            return 0;
+        }
+        //左右子节点
+        int left = dfs(root.left) + 1;
+        int right = dfs(root.right) + 1;
+        if (Math.abs(left - right) > 1){
+            flag = false;
+        }
+        //返回最深的节点
+        return Math.max(left,right);
     }
 }
 
