@@ -1,6 +1,8 @@
 package com.niuke.jz27;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Stream;
 
 /**
@@ -35,15 +37,15 @@ public class Main {
      */
     public ArrayList<String> Permutation(String str) {
         char[] chars = str.toCharArray();
-        ArrayList<String> list = new ArrayList<>();
-        dfs(chars,list,"");
-        return list;
+        Set<String> set = new HashSet<>();
+        dfs(chars,set,"");
+        return null;
     }
 
-    private void dfs(char[] chars, ArrayList<String> list, String s) {
+    private void dfs(char[] chars, Set<String> set, String s) {
         //结束条件：当s的长度和chars的长度一样时
         if (s.length() == chars.length){
-            list.add(new String(s));
+            set.add(new String(s));
             return;
         }
         //交换

@@ -18,6 +18,35 @@ public class Main {
     }
 
     /**
+     * 最简单的办法，把数组分开，再合并不就好了吗
+     * @param array
+     */
+    public int[] reOrderArray(int [] array) {
+
+        if (array==null||array.length == 0){
+            return array;
+        }
+        int[] pre = new int[array.length];
+        int[] end = new int[array.length];
+        int x = 0, y = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] % 2 == 0){
+                //偶数，放后面
+                end[x++] = array[i];
+            }else {
+                //奇数
+                pre[y++] = array[i];
+            }
+        }
+        //合并
+        for (int i = y,j=0; i < pre.length; i++,j++) {
+            pre[i] = end[j];
+        }
+
+        return pre;
+    }
+
+    /**
      * 思路：
      * 感觉这个和快排的思想差不多，就是对换前后奇数偶数的位置，但是有一个条件好像不对。就是得保证相对位置不发生改变。
      * 如果考虑简单一点的话，就使用两个数组分别存储奇数和偶数，这样时间复杂度为O(n)，空间复杂度也为O(n)
@@ -28,25 +57,25 @@ public class Main {
      *
      * @param array
      */
-    public void reOrderArray(int [] array) {
-        if (array == null||array.length == 0){
-            return;
-        }
-        int mid = array.length / 2;
-        int l = mid-1,r  = mid;
-        while (l >= 0 || r <= array.length){
-            while (array[l]%2 == 1){//奇数
-                l--;
-            }
-            while (array[r]%2 == 0){//奇数
-                r++;
-            }
-            //交换
-            int temp = array[l];
-            array[l] = array[r];
-            array[r] = temp;
-            l--;
-            r++;
-        }
-    }
+//    public void reOrderArray(int [] array) {
+//        if (array == null||array.length == 0){
+//            return;
+//        }
+//        int mid = array.length / 2;
+//        int l = mid-1,r  = mid;
+//        while (l >= 0 || r <= array.length){
+//            while (array[l]%2 == 1){//奇数
+//                l--;
+//            }
+//            while (array[r]%2 == 0){//奇数
+//                r++;
+//            }
+//            //交换
+//            int temp = array[l];
+//            array[l] = array[r];
+//            array[r] = temp;
+//            l--;
+//            r++;
+//        }
+//    }
 }

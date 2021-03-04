@@ -33,31 +33,39 @@ public class Main {
     }
 
     public void Mirror(TreeNode root) {
-        if (root == null){
-            return;
-        }
         dfs(root);
     }
 
     private void dfs(TreeNode root) {
-        if (root.left == root.right){
-            //两个都为null的时候，不再往下继续了
+        if (root == null){
             return;
         }
-        //交换
+        dfs(root.left);
+        dfs(root.right);
         TreeNode temp = root.left;
         root.left = root.right;
         root.right = temp;
-        //继续往下
-        if (root.left != null){
-            //不为null
-            dfs(root.left);
-        }
-        if (root.right != null){
-            //不为null
-            dfs(root.right);
-        }
     }
+
+//    private void dfs(TreeNode root) {
+//        if (root.left == root.right){
+//            //两个都为null的时候，不再往下继续了
+//            return;
+//        }
+//        //交换
+//        TreeNode temp = root.left;
+//        root.left = root.right;
+//        root.right = temp;
+//        //继续往下
+//        if (root.left != null){
+//            //不为null
+//            dfs(root.left);
+//        }
+//        if (root.right != null){
+//            //不为null
+//            dfs(root.right);
+//        }
+//    }
 }
 
 class TreeNode {

@@ -1,30 +1,25 @@
 package com.test.test8;
 
-public class Person<T extends String> implements Comparable<T> {
+public class Person{
 
-    private T name;
-    private T age;
+    private String name;
+    private String age;
     public String test = "hhh";
 
-    public T getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(T name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public T getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(T age) {
+    public void setAge(String age) {
         this.age = age;
     }
 
-    @Override
-    public int compareTo(T o) {
-
-        return 0;
-    }
 }
