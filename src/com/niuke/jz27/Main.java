@@ -1,9 +1,7 @@
 package com.niuke.jz27;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Stream;
+import java.util.Collections;
 
 /**
  *
@@ -36,24 +34,44 @@ public class Main {
      * @return
      */
     public ArrayList<String> Permutation(String str) {
-        char[] chars = str.toCharArray();
-        Set<String> set = new HashSet<>();
-        dfs(chars,set,"");
-        return null;
+        ArrayList<String> list = new ArrayList<>();
+        dfs(list,str,0);
+        Collections.sort(list);
+        return list;
     }
 
-    private void dfs(char[] chars, Set<String> set, String s) {
+    /**
+     *
+     * @param list 返回的结果
+     * @param s 每个Item
+     * @param index 当前的要交换的位置
+     */
+    private void dfs(ArrayList<String> list, String s,int index) {
         //结束条件：当s的长度和chars的长度一样时
-        if (s.length() == chars.length){
-            set.add(new String(s));
-            return;
+        if (index == s.length() && !list.contains(s)){
+            list.add(s);
         }
-        //交换
+        //这里要用一个for循环，因为要对从index后的每一位进行交换
+        for (int i = index; i < s.length(); ++i) {
+            //交换
+            s = swap(s,index,i);
+            //递归
+            dfs(list, s, index + 1);
+            //恢复
+            s = swap(s,i,index);
+        }
 
-        //递归
+    }
 
-        //恢复
-
+    private String swap(String s, int index, int i) {
+        if (i != index){
+            StringBuffer sb = new StringBuffer(s);
+            char temp = sb.charAt(index);
+            sb.setCharAt(index,sb.charAt(i));
+            sb.setCharAt(i,temp);
+            s = sb.toString();
+        }
+        return s;
     }
 
 }
