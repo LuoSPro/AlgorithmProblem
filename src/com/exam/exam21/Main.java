@@ -45,7 +45,7 @@ public class Main {
         return head.next;
     }
 
-    public class ListNode {
+    class ListNode {
         int val;
         ListNode next;
 

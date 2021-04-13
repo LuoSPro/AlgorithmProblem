@@ -19,7 +19,8 @@ public class Main {
         int[] numbers = {2,3,1,0,2,5,3};
         int length = 7;
         int[] duplication = new int[1];
-        System.out.println(new Main().duplicate(numbers, length, duplication));
+//        System.out.println(new Main().duplicate(numbers, length, duplication));
+        System.out.println(new Main().duplicate(numbers));
     }
 
     /**
@@ -49,11 +50,23 @@ public class Main {
             temp = numbers[index];
             index = numbers[temp];
         }
+        /**
+         * temp index numbers[index]  numbers[temp]
+         *       2     1
+         *  1    3                       3
+         *  0    2        0             2
+         *                1
+         *
+         *
+         *
+         */
         if (numbers[index] == index){
             duplication[0] = index;
             return true;
         }
         return false;
+
+        //我的解法
 
 
 //        Set<Integer> set = new HashSet<>();
@@ -67,5 +80,19 @@ public class Main {
 //        return false;
 
 
+    }
+
+    public int duplicate (int[] numbers) {
+        // write code here
+        int arr[] = new int[numbers.length];
+        for (int i = 0; i < numbers.length; i++) {
+            arr[numbers[i]]++;
+        }
+        for (int i = 0; i < numbers.length; i++) {
+            if (arr[numbers[i]] > 1){
+                return numbers[i];
+            }
+        }
+        return -1;
     }
 }
